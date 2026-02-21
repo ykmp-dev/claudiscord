@@ -1,0 +1,44 @@
+# claudiscord Configuration
+
+discord:
+  guildId: "YOUR_GUILD_ID"  # テスト用サーバーID（コマンド登録用）
+
+llm:
+  defaultBackend: "claude"  # "claude" or "glm"
+  claude:
+    enabled: true
+  glm:
+    enabled: true
+    baseUrl: "https://api.z.ai/api/anthropic"
+    authToken: "${ZAI_AUTH_TOKEN}"
+    model: "glm-5"
+    maxTokens: 131072
+
+channels:
+  "CHANNEL_ID":
+    backend: "claude"           # 使用するバックエンド
+    directory: "/path/to/project"
+    permissionMode: "acceptEdits"
+    description: "Web frontend"
+
+toolPolicy:
+  autoApprove:
+    - Read
+    - Glob
+    - Grep
+    - WebSearch
+    - WebFetch
+  logOnly:
+    - Write
+    - Edit
+    - NotebookEdit
+  requireApproval:
+    - Bash
+  approvalTimeoutSec: 300
+
+output:
+  streamingIntervalMs: 1500
+  showToolSummary: true
+
+logging:
+  level: "info"

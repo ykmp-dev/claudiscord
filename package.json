@@ -1,0 +1,45 @@
+{
+  "name": "claudiscord",
+  "version": "0.1.0",
+  "description": "Discord LLM Bridge - Operate Claude Code CLI and GLM-5 via Discord",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "claudiscord": "dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "register-commands": "tsx scripts/register-commands.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "discord",
+    "claude",
+    "anthropic",
+    "glm",
+    "bot"
+  ],
+  "author": "yuber",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.47",
+    "@anthropic-ai/sdk": "^0.32.0",
+    "discord.js": "^14.25.1",
+    "dotenv": "^17.3.1",
+    "pino": "^10.3.1",
+    "pino-pretty": "^13.0.0",
+    "yaml": "^2.8.2",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
