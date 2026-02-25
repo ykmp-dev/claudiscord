@@ -3,7 +3,7 @@
 import type { Message, Client } from 'discord.js'
 import { sessionManager } from '../../core/SessionManager.js'
 import { BridgeFactory } from '../../bridges/BridgeFactory.js'
-import { ToolPolicy } from '../../policies/ToolPolicy.js'
+import { ToolPolicy, ToolApprovalResult } from '../../policies/ToolPolicy.js'
 import { OutputFilter } from '../../filters/OutputFilter.js'
 import { formatError, formatSuccess, formatSessionStatus } from '../formatters.js'
 import type { Config } from '../../types/config.js'
@@ -112,9 +112,10 @@ export class MessageHandler {
     if (chunk.type === 'text') {
       const { display } = filter.process(chunk.content)
       if (display) {
-        // 編集または新規メッセージ
-        // TODO: Implement proper streaming message update
+        await message.channel.send(display)
       }
+    } else if (chunk.type === 'tool_use' && chunk.toolName) {
+      await message.channel.send(`🔧 Using tool: ${chunk.toolName}`)
     }
   }
 
